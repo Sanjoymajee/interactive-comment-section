@@ -34,12 +34,7 @@ export default function ReplyBox({
       <form action="POST" onSubmit={(e) => sendReply(e)}>
         <div className="reply_content">
           <img src={currentUser.image.png} alt={currentUser.username} />
-          <input
-            name="comment"
-            type="text"
-            placeholder="Add a comment..."
-            autoComplete="off"
-          ></input>
+          <textarea name="comment" placeholder="Add a comment..."></textarea>
           <button type="submit">Reply</button>
         </div>
       </form>

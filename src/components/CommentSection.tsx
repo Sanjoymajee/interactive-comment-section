@@ -60,12 +60,11 @@ export default function CommentSection() {
         <form action="POST" onSubmit={(e) => addComment(e)}>
           <div className="reply_content">
             <img src={currentUser.image.png} alt={currentUser.username} />
-            <input
+            <textarea
               name="comment"
-              type="text"
               placeholder="Add a comment..."
               autoComplete="off"
-            ></input>
+            ></textarea>
             <button type="submit">Send</button>
           </div>
         </form>

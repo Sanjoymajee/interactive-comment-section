@@ -23,7 +23,7 @@
   border-radius: 50%;
 }
 
-.reply_content input {
+.reply_content textarea {
   width: 100%;
   height: auto;
   border: none;
@@ -36,11 +36,12 @@
   border: 1px solid var(--Light-grayish-blue);
   color: var(--Dark-blue);
   font-size: 1rem;
+  font-family: "Rubik", sans-serif;
 }
 
-.reply_content input::placeholder {
+.reply_content textarea::placeholder {
   color: var(--Dark-blue);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .reply_content button {

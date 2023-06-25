@@ -38,6 +38,8 @@ export default function Comment({ comment, addReply, onDelete }: CommentProps) {
   const [replying, setReplying] = useState(false);
   const user = comment.user;
   const { deleting, setDeleting } = useCommentReply();
+  const [editing, setEditing] = useState(false);
+  const [commentText, setCommentText] = useState(comment.content);
 
   return (
     <div className="comment_reply">
@@ -86,7 +88,7 @@ export default function Comment({ comment, addReply, onDelete }: CommentProps) {
                   <img src="/images/icon-delete.svg" alt="delete-icon" />
                   Delete
                 </button>
-                <button id="edit-button">
+                <button id="edit-button" onClick={() => setEditing(true)}>
                   <img src="/images/icon-edit.svg" alt="edit-icon" />
                   Edit
                 </button>
@@ -100,27 +102,40 @@ export default function Comment({ comment, addReply, onDelete }: CommentProps) {
               </div>
             )}
           </div>
-          <div className="comment_text">
-            {comment.content.length > 300 && !showMore ? (
-              <span>
-                <p>
-                  {comment.content.slice(0, 300)}...
-                  <button onClick={() => setShowMore(true)}>Show More</button>
-                </p>
-              </span>
-            ) : (
-              <span>
-                <p>
-                  {comment.content}
-                  {comment.content.length > 300 && (
-                    <button onClick={() => setShowMore(false)}>
-                      Show Less
-                    </button>
-                  )}
-                </p>
-              </span>
-            )}
-          </div>
+          {editing ? (
+            <div className="editing_area">
+              <textarea
+                name="comment"
+                id="edit-comment"
+                placeholder="Add a comment..."
+                value={commentText}
+                onChange={(e) => setCommentText(e.target.value)}
+              ></textarea>
+              <button onClick={() => setEditing(false)}>Update</button>
+            </div>
+          ) : (
+            <div className="comment_text">
+              {commentText.length > 300 && !showMore ? (
+                <span>
+                  <p>
+                    {commentText.slice(0, 300)}...
+                    <button onClick={() => setShowMore(true)}>Show More</button>
+                  </p>
+                </span>
+              ) : (
+                <span>
+                  <p>
+                    {commentText}
+                    {commentText.length > 300 && (
+                      <button onClick={() => setShowMore(false)}>
+                        Show Less
+                      </button>
+                    )}
+                  </p>
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
       {replying ? (
