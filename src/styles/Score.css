@@ -1,0 +1,26 @@
+@import "./Root.css";
+
+.score {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--Light-gray);
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 20px;
+  margin-bottom: auto;
+}
+
+.score button {
+  background-color: transparent;
+  border: none;
+  color: var(--Moderate-blue);
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.score span {
+  color: var(--Moderate-blue);
+}
