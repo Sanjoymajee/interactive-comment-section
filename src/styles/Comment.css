@@ -282,7 +282,8 @@ button:hover {
 @media screen and (width <= 768px) {
   .comment {
     display: grid;
-    grid-template-columns: auto;
+
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     gap: 0;
     padding: 0 1rem 1rem 1rem;
@@ -291,6 +292,10 @@ button:hover {
   .comment_content {
     padding: 1rem 0 1rem 0;
     grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 100%;
   }
 
   .comment_text {
@@ -326,6 +331,12 @@ button:hover {
     padding: 0;
   }
 
+  .__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .__header .reply_button button {
     font-size: 0.8rem;
   }
@@ -333,6 +344,10 @@ button:hover {
   .__header .reply_button img {
     height: 8px;
     margin-right: 0.2rem;
+  }
+
+  .__header .edit_buttons {
+    margin-left: 0.5rem;
   }
 
   .comment_text span p button {
