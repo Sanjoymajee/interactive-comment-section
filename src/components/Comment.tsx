@@ -3,67 +3,74 @@ import Score from "./Score";
 import ReplyBox from "./ReplyBox";
 import { useState } from "react";
 import { CommentType, currentUser } from "./CommentSection";
-import useCommentReply from "../Hooks/UseCommentReply";
-// import useCommentReply from "../Hooks/UseCommentReply";
-
-const getTimeAgo = (currentTime: Date, createdAt: Date): string => {
-  const timeDiff = currentTime.getTime() - createdAt.getTime();
-  const seconds = Math.floor(timeDiff / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const months = Math.floor(days / 30);
-
-  if (months > 0) {
-    return months === 1 ? "1 month ago" : `${months} months ago`;
-  } else if (days > 0) {
-    return days === 1 ? "1 day ago" : `${days} days ago`;
-  } else if (hours > 0) {
-    return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
-  } else if (minutes > 0) {
-    return minutes === 1 ? "1 minute ago" : `${minutes} minutes ago`;
-  } else {
-    return "now";
-  }
-};
+import { useCommentReply } from "../Hooks/UseCommentReply";
+import { getTimeAgo } from "../utils/CommentServices";
 
 interface CommentProps {
   comment: CommentType;
-  addReply: (comment: CommentType) => void;
-  onDelete: (commentId: number) => void;
 }
 
-export default function Comment({ comment, addReply, onDelete }: CommentProps) {
+export default function Comment({ comment }: CommentProps) {
   const [showMore, setShowMore] = useState(false);
   const [replying, setReplying] = useState(false);
   const user = comment.user;
-  const { deleting, setDeleting } = useCommentReply();
+  const [deleting, setDeleting] = useState(false);
   const [editing, setEditing] = useState(false);
   const [commentText, setCommentText] = useState(comment.content);
+  const { deleteComment, updateComment } = useCommentReply();
+
+  const handleConfirmDeleteClick = (commentId: number) => {
+    deleteComment(commentId);
+  };
+
+  const handleCancelDeleteClick = () => {
+    setDeleting(false);
+  };
+
+  const onUpdate = () => {
+    const { content, createdAt, ...rest } = comment;
+    const newComment: CommentType = {
+      content: commentText,
+      createdAt: new Date(),
+      ...rest,
+    };
+    updateComment(newComment);
+    setEditing(false);
+  };
 
   return (
     <div className="comment_reply">
       {deleting && (
-        <div className="delete_model">
-          <div className="delete_model_content">
-            <h2>Delete Comment</h2>
-            <p>
-              Are you sure you want to delete this comment? This will remove the
-              comment and can't be undone
-            </p>
-            <div className="buttons">
-              <button className="cancel" onClick={() => setDeleting(false)}>
-                Cancel
-              </button>
-              <button className="delete" onClick={() => onDelete(comment.id)}>
-                Delete
-              </button>
+        <div className="delete_backdrop">
+          <div className="delete_model">
+            <div className="delete_model_content">
+              <div className="content_text">
+                <h2>Delete Comment</h2>
+                <p>
+                  Are you sure you want to delete this comment? This will remove
+                  the comment and can't be undone
+                </p>
+              </div>
+              <div className="buttons">
+                <button
+                  className="cancel"
+                  onClick={() => handleCancelDeleteClick()}
+                >
+                  No, Cancel
+                </button>
+                <button
+                  className="delete"
+                  onClick={() => handleConfirmDeleteClick(comment.id)}
+                >
+                  Yes, Delete
+                </button>
+              </div>
             </div>
           </div>
         </div>
       )}
       <div className="comment">
-        <Score score={comment.score} />
+        <Score comment={comment} />
         <div className="comment_content">
           <div className="__header">
             <div className="user_details">
@@ -111,7 +118,7 @@ export default function Comment({ comment, addReply, onDelete }: CommentProps) {
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
               ></textarea>
-              <button onClick={() => setEditing(false)}>Update</button>
+              <button onClick={() => onUpdate()}>Update</button>
             </div>
           ) : (
             <div className="comment_text">
@@ -142,17 +149,12 @@ export default function Comment({ comment, addReply, onDelete }: CommentProps) {
         <ReplyBox
           currentUser={currentUser}
           comment={comment}
-          addReply={addReply}
+          // addReply={addReply}
         />
       ) : null}
       <div className="reply_container">
         {comment.replies.map((reply) => (
-          <Comment
-            key={reply.id}
-            comment={reply}
-            addReply={addReply}
-            onDelete={onDelete}
-          />
+          <Comment key={reply.id} comment={reply} />
         ))}
       </div>
     </div>

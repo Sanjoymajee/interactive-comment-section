@@ -1,6 +1,6 @@
 import Comment from "./Comment";
 import Data from "../assets/data.json";
-import useCommentReply from "../Hooks/UseCommentReply";
+import { useCommentReply } from "../Hooks/UseCommentReply";
 
 export interface CommentType {
   id: number;
@@ -19,12 +19,14 @@ export interface UserType {
     webp: string;
   };
   username: string;
+  postsUpvoted: number[];
+  postsDownvoted: number[];
 }
 
 export const currentUser: UserType = Data.currentUser;
 
 export default function CommentSection() {
-  const { comments, addReply, deleteComment } = useCommentReply();
+  const { comments, addReply } = useCommentReply();
   const addComment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!e.currentTarget.comment.value) return;
@@ -42,19 +44,10 @@ export default function CommentSection() {
     e.currentTarget.comment.value = "";
   };
 
-  const onDelete = (commentId: number) => {
-    deleteComment(commentId);
-  };
-
   return (
     <div className="comment_section">
       {comments.map((comment: CommentType) => (
-        <Comment
-          key={comment.id}
-          comment={comment}
-          addReply={addReply}
-          onDelete={onDelete}
-        />
+        <Comment key={comment.id} comment={comment} />
       ))}
       <div className="reply_box">
         <form action="POST" onSubmit={(e) => addComment(e)}>

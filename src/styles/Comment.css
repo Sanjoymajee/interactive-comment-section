@@ -4,7 +4,77 @@
   margin-bottom: 1rem;
 }
 
+.delete_backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
 .delete_model {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 30px;
+  border-radius: 5px;
+  width: 300px;
+  z-index: 101;
+}
+
+.delete_model_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content_text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.content_text h2 {
+  margin: 0;
+  color: var(--Dark-blue);
+}
+
+.content_text p {
+  margin: 0.5rem 0;
+  color: var(--Dark-blue);
+}
+
+.delete_model_content .buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.delete_model_content .buttons button {
+  margin: 0;
+  height: 50px;
+  width: 50%;
+  text-transform: uppercase;
+}
+
+.delete_model_content .cancel {
+  background-color: var(--Grayish-Blue);
+  border: 0;
+}
+
+.delete_model_content .delete {
+  background-color: var(--Soft-Red);
+  border: 0;
+}
+
+/* .delete_model {
   position: absolute;
   top: 50vh;
   left: 50wh;
@@ -58,7 +128,7 @@
 
 .cancel:hover {
   opacity: 0.5;
-}
+} */
 
 .comment {
   background-color: var(--White);

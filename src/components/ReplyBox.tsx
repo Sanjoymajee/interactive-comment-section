@@ -1,18 +1,15 @@
 // import useCommentReply from "../Hooks/UseCommentReply";
+import { useCommentReply } from "../Hooks/UseCommentReply";
 import "../styles/ReplyBox.css";
 import { CommentType, UserType } from "./CommentSection";
 
 interface ReplyBoxProps {
   currentUser: UserType;
   comment: CommentType;
-  addReply: (comment: CommentType) => void;
 }
 
-export default function ReplyBox({
-  currentUser,
-  comment,
-  addReply,
-}: ReplyBoxProps) {
+export default function ReplyBox({ currentUser, comment }: ReplyBoxProps) {
+  const { addReply } = useCommentReply();
   const sendReply = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!e.currentTarget.comment.value) return;
@@ -34,8 +31,12 @@ export default function ReplyBox({
       <form action="POST" onSubmit={(e) => sendReply(e)}>
         <div className="reply_content">
           <img src={currentUser.image.png} alt={currentUser.username} />
-          <textarea name="comment" placeholder="Add a comment..."></textarea>
-          <button type="submit">Reply</button>
+          <textarea
+            name="comment"
+            placeholder="Add a comment..."
+            autoFocus
+          ></textarea>
+          <button type="button">Reply</button>
         </div>
       </form>
     </div>
