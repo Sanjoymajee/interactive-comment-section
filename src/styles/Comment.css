@@ -4,6 +4,10 @@
   margin-bottom: 1rem;
 }
 
+.comment_section {
+  min-width: 550px;
+}
+
 .delete_backdrop {
   position: fixed;
   top: 0;
@@ -273,4 +277,72 @@ button:focus {
 
 button:hover {
   opacity: 0.5;
+}
+
+@media screen and (width <= 768px) {
+  .comment {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    gap: 0;
+  }
+
+  .comment_content {
+    padding: 1.5rem 0 1.5rem 0;
+    grid-row-start: 1;
+  }
+
+  .comment_text {
+    width: 100%;
+  }
+
+  .comment_text p {
+    text-align: left;
+  }
+
+  .comment_text span {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comment_text span p button {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+
+  .comment_text span p {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: var(--Grayish-Blue);
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+  }
+
+  .comment_text span p button {
+    background-color: transparent;
+    color: var(--Moderate-blue);
+    padding: 0;
+    margin: 0;
+    border: 0;
+    margin-left: 0.5rem;
+  }
+
+  .comment_text span p button:hover {
+    border: 0;
+    outline: none;
+    opacity: 0.5;
+  }
+
+  .reply_container {
+    margin: 0;
+    padding: 0;
+    width: calc(100% - 5.25rem);
+    padding-left: 2.5rem;
+    margin-top: 1rem;
+    margin-left: auto;
+    border-left: 2px solid var(--Light-grayish-blue);
+  }
 }
