@@ -36,7 +36,7 @@ export default function ReplyBox({ currentUser, comment }: ReplyBoxProps) {
             placeholder="Add a comment..."
             autoFocus
           ></textarea>
-          <button type="button">Reply</button>
+          <button type="submit">Reply</button>
         </div>
       </form>
     </div>

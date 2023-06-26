@@ -74,62 +74,6 @@
   border: 0;
 }
 
-/* .delete_model {
-  position: absolute;
-  top: 50vh;
-  left: 50wh;
-  z-index: 100;
-  color: var(--Dark-blue);
-  width: 500px;
-  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
-  border-radius: 1rem;
-}
-
-.delete_model_content {
-  background-color: var(--White);
-  color: var(--Dark-blue);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  display: flex;
-  text-align: left;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.delete_model_content button {
-  border: none;
-  color: var(--White);
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-}
-
-.delete_model_content .buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.delete_model_content .delete {
-  background-color: var(--Soft-Red);
-}
-
-.delete:hover {
-  opacity: 0.5;
-}
-
-.delete_model_content .cancel {
-  background-color: var(--Moderate-blue);
-}
-
-.cancel:hover {
-  opacity: 0.5;
-} */
-
 .comment {
   background-color: var(--White);
   color: var(--Dark-blue);
