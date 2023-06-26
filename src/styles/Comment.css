@@ -6,6 +6,7 @@
 
 .comment_section {
   min-width: 350px;
+  max-width: 786px;
 }
 
 .delete_backdrop {
